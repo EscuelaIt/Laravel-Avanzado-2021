@@ -129,7 +129,5 @@
                 </div>
             </div>
         </div>
-
-        <h2>{{ $users->count() }}</h2>
     </body>
 </html>
