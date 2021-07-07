@@ -10,7 +10,10 @@
         "fruitcake/laravel-cors": "^2.0",
         "genealabs/laravel-model-caching": "^0.11.3",
         "laravel/framework": "^8.40",
+        "laravel/jetstream": "^2.3",
+        "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "livewire/livewire": "^2.5",
         "sentry/sentry-laravel": "^2.7",
         "spatie/laravel-backup": "^7.6"
     },
@@ -54,6 +57,10 @@
     },
     "config": {
         "optimize-autoloader": true,
+        "platform": {
+          "ext-pcntl": "8.0",
+          "ext-posix": "8.0"
+        },
         "preferred-install": "dist",
         "sort-packages": true
     },
