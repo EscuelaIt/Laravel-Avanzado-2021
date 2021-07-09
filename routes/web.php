@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Mail\WelcomeEmail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::resource('users', UserController::class);
+
+Route::get('/mailable', function () {
+    return new WelcomeEmail('Juan');
 });
 
 Route::get('/dashboard', function () {

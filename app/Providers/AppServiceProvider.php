@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\MockiService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(MockiService::class, function ($app) {
+            return new MockiService('d4867d8b-b5d5-4a48-a4ab-79131b5809b8');
+        });
+
+        // $this->app->singleton(MockiService::class, function ($app) {
+        //     return new MockiService('d4867d8b-b5d5-4a48-a4ab-79131b5809b8');
+        // });
     }
 
     /**

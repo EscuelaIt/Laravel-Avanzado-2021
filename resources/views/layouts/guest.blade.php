@@ -18,6 +18,8 @@
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
+            {{ $test }}
+            {{ $names }}
             {{ $slot }}
         </div>
     </body>
