@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\LongExecutionJob;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Services\MockiService;
@@ -25,7 +26,15 @@ class UserController extends Controller
     {
         $usersNames = $this->service->resolveUsersNames();
 
-        return $usersNames;
+        $job = new LongExecutionJob($user);
+
+        $job::dispatch()->onQueue('random');
+        // $job::dispatchSync();
+        // $job::dispatchAfterResponse();
+
+        return view('users.index')->with([
+            'usersNames' => $usersNames,
+        ]);
     }
 
     /**
