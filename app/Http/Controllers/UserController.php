@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\LongExecutionJob;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 use App\Services\MockiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -15,6 +16,15 @@ class UserController extends Controller
 
     public function __construct(MockiService $service)
     {
+        $this->middleware('can:create,' . User::class)
+            ->only(['create', 'store']);
+
+        // $this->middleware('can:update,' . User::class)
+        //     ->only(['create', 'store']);
+
+        $this->middleware('can:update,user')
+            ->only(['edit', 'update']);
+
         $this->service = $service;
     }
     /**
@@ -26,7 +36,7 @@ class UserController extends Controller
     {
         $usersNames = $this->service->resolveUsersNames();
 
-        $job = new LongExecutionJob($user);
+        $job = new LongExecutionJob();
 
         $job::dispatch()->onQueue('random');
         // $job::dispatchSync();
@@ -44,6 +54,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        // $this->authorize('create', User::class);
+
         return view('users.create');
     }
 
@@ -55,12 +67,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // $this->authorize('create', User::class);
+
         // $path = $request->file('image')->store('images');
         $extension = $request->file('image')->extension();
 
         $path = $request->file('image')->storeAs('images', "image.{$extension}");
 
-        Mail::to('test@test.com')->send(new WelcomeEmail('Pepe'));
+        $request->user()->notify(new WelcomeNotification('Welcome'));
+
+        // Mail::to('test@test.com')->send(new WelcomeEmail('Test'));
 
         return asset($path);
     }
@@ -84,7 +100,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return request()->user()->id .  ' - ' . $user->id;
     }
 
     /**
@@ -96,7 +112,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        return $request->user()->id .  ' - ' . $user->id;
     }
 
     /**

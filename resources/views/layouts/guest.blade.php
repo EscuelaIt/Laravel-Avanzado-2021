@@ -22,5 +22,11 @@
             {{ $names }}
             {{ $slot }}
         </div>
+        <div class="font-sans text-gray-900 antialiased">
+            {{-- @foreach (optional(request()->user())->unreadNotifications as $notification)
+                {{ $notification->data['message'] }},
+                {{ $notification->data['name'] }}
+            @endforeach --}}
+        </div>
     </body>
 </html>

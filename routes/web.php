@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)->middleware('auth');
 
 Route::get('/mailable', function () {
     return new WelcomeEmail('Juan');
