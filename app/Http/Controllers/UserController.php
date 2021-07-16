@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CustomEvent;
 use App\Jobs\LongExecutionJob;
 use App\Mail\WelcomeEmail;
 use App\Models\User;
@@ -67,6 +68,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        CustomEvent::dispatch();
+
+        $number = mt_rand(1, 100);
+
+        $user = User::factory()->create([
+            // 'name',
+            'email' => "test{$number}@test.com",
+            // 'password',
+            // 'is_admin',
+        ]);
         // $this->authorize('create', User::class);
 
         // $path = $request->file('image')->store('images');
@@ -74,7 +85,7 @@ class UserController extends Controller
 
         $path = $request->file('image')->storeAs('images', "image.{$extension}");
 
-        $request->user()->notify(new WelcomeNotification('Welcome'));
+        // $request->user()->notify(new WelcomeNotification('Welcome'));
 
         // Mail::to('test@test.com')->send(new WelcomeEmail('Test'));
 

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Notifications\WelcomeNotification;
+use App\Scopes\VisibleScope;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'birth_date',
     ];
 
     /**
@@ -41,7 +44,28 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birth_date' => 'datetime',
+        // 'is_admin' => 'boolean',
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->notify(new WelcomeNotification('Welcome'));
+        });
+
+        static::addGlobalScope(new VisibleScope);
+    }
+
+    public function getAgeAttribute()
+    {
+        return $this->birth_date->diffInYears(now());
+    }
 
     public function isAdmin()
     {
