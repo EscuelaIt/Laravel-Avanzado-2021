@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Services\MockiService;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Model::preventLazyLoading(! $this->app->isProduction());
+
+        Carbon::setLocale(app()->getLocale());
     }
 }

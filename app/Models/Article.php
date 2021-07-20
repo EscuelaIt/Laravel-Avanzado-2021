@@ -11,6 +11,8 @@ class Article extends Model
 {
     use HasFactory, Taggable;
 
+    protected $with = ['tags'];
+
     protected $fillable = [
         'title',
         'content',

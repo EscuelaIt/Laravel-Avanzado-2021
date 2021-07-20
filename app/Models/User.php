@@ -6,11 +6,12 @@ use App\Notifications\WelcomeNotification;
 use App\Scopes\VisibleScope;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasLocalePreference
 {
     use Cachable, HasFactory, Notifiable;
 
@@ -70,5 +71,15 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->is_admin == true;
+    }
+
+    /**
+     * Get the user's preferred locale.
+     *
+     * @return string
+     */
+    public function preferredLocale()
+    {
+        return 'es';
     }
 }

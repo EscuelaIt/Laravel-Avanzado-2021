@@ -10,6 +10,8 @@ class Video extends Model
 {
     use HasFactory, Taggable;
 
+    protected $with = ['tags'];
+
     protected $fillable = [
         'title',
         'url',

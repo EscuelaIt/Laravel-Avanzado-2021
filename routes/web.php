@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Mail\WelcomeEmail;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ Route::get('/', function () {
 });
 
 Route::resource('users', UserController::class)->middleware('auth');
+
+Route::get('/test', [TestController::class, 'test'])->name('test');
 
 Route::get('/mailable', function () {
     return new WelcomeEmail('Juan');

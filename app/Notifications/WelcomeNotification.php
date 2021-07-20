@@ -44,7 +44,7 @@ class WelcomeNotification extends Notification
     public function toMail($notifiable)
     {
         return (new WelcomeEmail($notifiable->name))
-            ->to($notifiable->email);
+            ->to($notifiable);
 
         // return (new MailMessage)
         //             ->line('The introduction to the notification.')

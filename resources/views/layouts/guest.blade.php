@@ -18,15 +18,15 @@
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
-            {{ $test }}
-            {{ $names }}
+            {{-- {{ $test }}
+            {{ $names }} --}}
             {{ $slot }}
         </div>
-        <div class="font-sans text-gray-900 antialiased">
-            {{-- @foreach (optional(request()->user())->unreadNotifications as $notification)
+        {{-- <div class="font-sans text-gray-900 antialiased">
+            @foreach (optional(request()->user())->unreadNotifications as $notification)
                 {{ $notification->data['message'] }},
                 {{ $notification->data['name'] }}
-            @endforeach --}}
-        </div>
+            @endforeach
+        </div> --}}
     </body>
 </html>

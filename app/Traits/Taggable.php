@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Models\Tag;
+
 trait Taggable
 {
     /**

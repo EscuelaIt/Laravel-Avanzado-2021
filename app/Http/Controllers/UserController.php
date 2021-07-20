@@ -87,7 +87,7 @@ class UserController extends Controller
 
         // $request->user()->notify(new WelcomeNotification('Welcome'));
 
-        // Mail::to('test@test.com')->send(new WelcomeEmail('Test'));
+        Mail::to('test@test.com')->send(new WelcomeEmail('Test'));
 
         return asset($path);
     }
