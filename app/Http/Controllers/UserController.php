@@ -17,8 +17,8 @@ class UserController extends Controller
 
     public function __construct(MockiService $service)
     {
-        $this->middleware('can:create,' . User::class)
-            ->only(['create', 'store']);
+        // $this->middleware('can:create,' . User::class)
+        //     ->only(['create', 'store']);
 
         // $this->middleware('can:update,' . User::class)
         //     ->only(['create', 'store']);
