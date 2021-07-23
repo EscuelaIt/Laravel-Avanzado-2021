@@ -13,7 +13,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "sentry/sentry-laravel": "^2.7",
-        "spatie/laravel-backup": "^7.6"
+        "spatie/laravel-backup": "6.16.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
