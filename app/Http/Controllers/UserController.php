@@ -71,10 +71,15 @@ class UserController extends Controller
         CustomEvent::dispatch();
 
         $number = mt_rand(1, 100);
+        $email = "test{$number}@test.com";
+
+        if ($request->has('email')) {
+            $email = $request->email;
+        }
 
         $user = User::factory()->create([
             // 'name',
-            'email' => "test{$number}@test.com",
+            'email' => $email,
             // 'password',
             // 'is_admin',
         ]);

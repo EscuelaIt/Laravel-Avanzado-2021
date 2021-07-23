@@ -30,6 +30,6 @@ class LongExecutionJob implements ShouldQueue
      */
     public function handle()
     {
-        sleep(5);
+        sleep(2);
     }
 }

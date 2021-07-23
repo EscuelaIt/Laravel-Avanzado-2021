@@ -60,7 +60,7 @@ class User extends Authenticatable implements HasLocalePreference
             $user->notify(new WelcomeNotification('Welcome'));
         });
 
-        static::addGlobalScope(new VisibleScope);
+        // static::addGlobalScope(new VisibleScope);
     }
 
     public function getAgeAttribute()
